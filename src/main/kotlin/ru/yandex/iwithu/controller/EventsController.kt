@@ -25,14 +25,13 @@ import javax.validation.Valid
 @Validated
 @RequestMapping(
     "events",
-    consumes = [MediaType.APPLICATION_JSON_VALUE],
     produces = [MediaType.APPLICATION_JSON_VALUE]
 )
 class EventsController(
     private val eventsService: EventsService
 ) {
 
-    @PostMapping
+    @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun eventsPost(
         @Valid @RequestBody eventDto: EventCreateDto,
         @AuthenticatedUser user: User
@@ -82,7 +81,7 @@ class EventsController(
         return ResponseEntity.ok().build()
     }
 
-    @PostMapping("{eventId}/join")
+    @PostMapping("{eventId}/join", consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun eventsEventIdJoinPost(
         @PathVariable("eventId") eventId: Long,
         @AuthenticatedUser user: User
@@ -100,7 +99,7 @@ class EventsController(
         return ResponseEntity.ok().build()
     }
 
-    @PutMapping("{eventId}")
+    @PutMapping("{eventId}", consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun eventsEventIdPut(
         @PathVariable("eventId") eventId: Long,
         @Valid @RequestBody eventDto: EventCreateDto,
