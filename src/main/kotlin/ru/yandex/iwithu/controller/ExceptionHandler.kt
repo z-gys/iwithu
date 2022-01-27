@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import ru.yandex.iwithu.exception.AlreadyExistsException
 import ru.yandex.iwithu.exception.BadCredentialException
+import ru.yandex.iwithu.exception.BadTokenException
 
 /**
 @author ugoryntsev
@@ -28,6 +29,12 @@ class ExceptionHandler {
     fun onBadCredentials(): ResponseEntity<Unit> = ResponseEntity
         .status(HttpStatus.UNAUTHORIZED)
         .headers(errorHeaders("Bad credentials"))
+        .build()
+
+    @ExceptionHandler(BadTokenException::class)
+    fun onBadToken(): ResponseEntity<Unit> = ResponseEntity
+        .status(HttpStatus.UNAUTHORIZED)
+        .headers(errorHeaders("Bad token"))
         .build()
 
     private fun errorHeaders(value: String): HttpHeaders {

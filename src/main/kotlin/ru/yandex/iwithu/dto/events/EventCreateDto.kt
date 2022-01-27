@@ -2,9 +2,17 @@ package ru.yandex.iwithu.dto.events
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
-import java.time.Instant
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
+import java.time.LocalDateTime
 import javax.validation.Valid
 import javax.validation.constraints.NotNull
+
+/**
+@author ugoryntsev
+ */
 
 /**
  * Тело запроса создания события
@@ -12,12 +20,11 @@ import javax.validation.constraints.NotNull
  * @param category Категория события
  * @param description Описание события
  * @param time Дата и время начала события в формате \"yyyy-MM-dd'T'HH:mm:ss'Z'\"
- * @param owner Логин создателя события
  * @param chatLink Ссылка на чат
  * @param capacity вместимость события
- * @param place 
+ * @param place
  */
-data class EventDto(
+data class EventCreateDto(
 
     @get:NotNull
     @field:JsonProperty("title") val title: String,
@@ -30,9 +37,9 @@ data class EventDto(
 
     @get:NotNull
     @field:JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
-    @field:JsonProperty("time") val time: Instant,
-
-    @field:JsonProperty("owner") val owner: String,
+    @field:JsonSerialize(using = LocalDateTimeSerializer::class)
+    @field:JsonDeserialize(using = LocalDateTimeDeserializer::class)
+    @field:JsonProperty("time") val time: LocalDateTime,
 
     @field:JsonProperty("chatLink") val chatLink: String? = null,
 
