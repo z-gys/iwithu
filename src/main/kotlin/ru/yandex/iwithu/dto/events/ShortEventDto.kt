@@ -1,4 +1,4 @@
-package ru.yandex.iwithu.dto
+package ru.yandex.iwithu.dto.events
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import javax.validation.constraints.NotNull

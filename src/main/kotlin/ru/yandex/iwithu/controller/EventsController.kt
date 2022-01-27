@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import ru.yandex.iwithu.dto.EventDto
-import ru.yandex.iwithu.dto.ShortEventDto
+import ru.yandex.iwithu.dto.events.EventDto
+import ru.yandex.iwithu.dto.events.ShortEventDto
 import javax.validation.Valid
 
 @RestController
