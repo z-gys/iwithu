@@ -6,6 +6,8 @@ info:
 paths:
   /register:
     post:
+      tags:
+        - auth
       description: Регистрация
       requestBody:
         required: true
@@ -25,6 +27,8 @@ paths:
                 type: string
   /login:
     post:
+      tags:
+        - auth
       description: Логин
       requestBody:
         required: true
@@ -55,6 +59,8 @@ paths:
                 type: string
   /events:
     get:
+      tags:
+        - events
       description: получение списка событий
       parameters:
         - in: header
@@ -85,6 +91,8 @@ paths:
         '401':
           description: Не передан токен авторизации ил он не существует
     post:
+      tags:
+        - events
       description: создание события
       parameters:
         - in: header
@@ -112,6 +120,8 @@ paths:
           description: Не передан токен авторизации или он не существует
   /events/my:
     get:
+      tags:
+        - events
       description: получение списка событий
       parameters:
         - in: header
@@ -143,6 +153,8 @@ paths:
           description: Не передан токен авторизации ил он не существует
   /events/joined:
     get:
+      tags:
+        - events
       description: получение списка событий
       parameters:
         - in: header
@@ -174,6 +186,8 @@ paths:
           description: Не передан токен авторизации ил он не существует
   /events/{eventId}:
     get:
+      tags:
+        - events
       description: Получение полной информации о событии
       parameters:
         - in: header
@@ -198,6 +212,8 @@ paths:
         '401':
           description: Не передан токен авторизации или он не существует
     put:
+      tags:
+        - events
       description: редактрование события
       parameters:
         - in: header
@@ -233,6 +249,8 @@ paths:
         '403':
           description: Пользователь пытается редактировать событие, где автор не он
     delete:
+      tags:
+        - events
       description: Удалить событие
       parameters:
         - in: header
@@ -257,6 +275,8 @@ paths:
 
   /events/{eventId}/join:
     post:
+      tags:
+        - events
       description: Вписаться в событие
       parameters:
         - in: header
@@ -277,6 +297,8 @@ paths:
         '401':
           description: Не передан токен авторизации или он не существует
     delete:
+      tags:
+        - events
       description: Слиться с события
       parameters:
         - in: header
