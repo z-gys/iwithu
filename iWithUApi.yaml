@@ -1,0 +1,435 @@
+openapi: 3.0.0
+info:
+  title: API Я.СВами
+  version: '1.0'
+
+paths:
+  /register:
+    post:
+      description: Регистрация
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequestDto'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Не передано обязательное поле
+          headers:
+            X-Error:
+              description: Ошибка
+              schema:
+                type: string
+  /login:
+    post:
+      description: Логин
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequestDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponseDto'
+        '400':
+          description: Не передано обязательное поле
+          headers:
+            X-Error:
+              description: Ошибка
+              schema:
+                type: string
+        '401':
+          description: Неверные регистрационные данные
+          headers:
+            X-Error:
+              description: Ошибка
+              schema:
+                type: string
+  /events:
+    get:
+      description: получение списка событий
+      parameters:
+        - in: header
+          name: Authorization
+          description: токен авторизации
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: page
+          schema:
+            type: integer
+          required: false
+          description: Номер страницы
+        - in: query
+          name: size
+          schema:
+            type: integer
+          required: false
+          description: Количество элементов на странице
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventsResponseDto'
+        '401':
+          description: Не передан токен авторизации ил он не существует
+    post:
+      description: создание события
+      parameters:
+        - in: header
+          name: Authorization
+          description: токен авторизации
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventDto'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Не передано обязательное поле
+          headers:
+            X-Error:
+              description: Ошибка
+              schema:
+                type: string
+        '401':
+          description: Не передан токен авторизации или он не существует
+  /events/my:
+    get:
+      description: получение списка событий
+      parameters:
+        - in: header
+          name: Authorization
+          description: токен авторизации
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: page
+          schema:
+            type: integer
+          required: false
+          description: Номер страницы
+        - in: query
+          name: size
+          schema:
+            type: integer
+          required: false
+          description: Количество элементов на странице
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventsResponseDto'
+        '401':
+          description: Не передан токен авторизации ил он не существует
+  /events/joined:
+    get:
+      description: получение списка событий
+      parameters:
+        - in: header
+          name: Authorization
+          description: токен авторизации
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: page
+          schema:
+            type: integer
+          required: false
+          description: Номер страницы
+        - in: query
+          name: size
+          schema:
+            type: integer
+          required: false
+          description: Количество элементов на странице
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventsResponseDto'
+        '401':
+          description: Не передан токен авторизации ил он не существует
+  /events/{eventId}:
+    get:
+      description: Получение полной информации о событии
+      parameters:
+        - in: header
+          name: Authorization
+          description: токен авторизации
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: eventId
+          description: id события
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventDto'
+        '401':
+          description: Не передан токен авторизации или он не существует
+    put:
+      description: редактрование события
+      parameters:
+        - in: header
+          name: Authorization
+          description: токен авторизации
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: eventId
+          description: id события
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventDto'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Не передано обязательное поле
+          headers:
+            X-Error:
+              description: Ошибка
+              schema:
+                type: string
+        '401':
+          description: Не передан токен авторизации или он не существует
+        '403':
+          description: Пользователь пытается редактировать событие, где автор не он
+    delete:
+      description: Удалить событие
+      parameters:
+        - in: header
+          name: Authorization
+          description: токен авторизации
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: eventId
+          description: id события
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Не передан токен авторизации или он не существует
+        '403':
+          description: Пользователь пытается удалить событие, где автор не он
+
+  /events/{eventId}/join:
+    post:
+      description: Вписаться в событие
+      parameters:
+        - in: header
+          name: Authorization
+          description: токен авторизации
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: eventId
+          description: id события
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Не передан токен авторизации или он не существует
+    delete:
+      description: Слиться с события
+      parameters:
+        - in: header
+          name: Authorization
+          description: токен авторизации
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: eventId
+          description: id события
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Не передан токен авторизации или он не существует
+components:
+  schemas:
+    RegistrationRequestDto:
+      type: object
+      description: Тело запроса регистрации
+      properties:
+        name:
+          type: string
+          description: Имя
+        about:
+          type: string
+          description: О себе
+        login:
+          type: string
+          description: уникальный логин
+        password:
+          type: string
+          description: пароль
+      required:
+        - login
+        - password
+        - name
+    LoginRequestDto:
+      type: object
+      description: Тело запроса логина
+      properties:
+        login:
+          description: логин
+          type: string
+        password:
+          description: пароль
+          type: string
+      required:
+        - login
+        - password
+    LoginResponseDto:
+      type: object
+      description: Носитель токена
+      properties:
+        token:
+          type: object
+          description: токен
+      required:
+        - token
+    ShortEventDto:
+      type: object
+      description: Объект эвента для отображения в списке
+      properties:
+        id:
+          type: integer
+          description: идентификатор события
+        category:
+          type: string
+          description: Категория
+        title:
+          description: Название события
+          type: string
+        description:
+          description: Описание события
+          type: string
+        capacity:
+          type: integer
+          description: Вместимость в человеках. Если не передано - неограниченная
+        membersCount:
+          type: integer
+          description: Количество присоединившихся
+        time:
+          type: string
+          description: Дата и время в формате "yyyy-MM-dd'T'HH:mm:ss'Z'"
+      required:
+        - category
+        - title
+        - description
+        - membersCount
+        - time
+    EventsResponseDto:
+      description: Список эвентов
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          description: общее количество страниц
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShortEventDto'
+      required:
+        - totalPages
+        - content
+    PlaceDto:
+      description: объект места проведения
+      type: object
+      properties:
+        lat:
+          description: Широта
+          type: number
+        lon:
+          description: Долгота
+          type: number
+        address:
+          description: Адрес
+          type: string
+      required:
+        - lat
+        - lon
+    EventDto:
+      description: Тело запроса создания события
+      type: object
+      properties:
+        owner:
+          type: string
+          description: Логин создателя события
+        title:
+          description: Название события
+          type: string
+        category:
+          description: Категория события
+          type: string
+        description:
+          description: Описание события
+          type: string
+        chatLink:
+          type: string
+          description: Ссылка на чат
+        capacity:
+          type: integer
+          description: вместимость события
+        time:
+          description: Дата и время начала события в формате "yyyy-MM-dd'T'HH:mm:ss'Z'"
+          type: string
+        place:
+          $ref: '#/components/schemas/PlaceDto'
+      required:
+        - title
+        - category
+        - description
+        - time
