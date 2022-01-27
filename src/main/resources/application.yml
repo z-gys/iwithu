@@ -1,5 +1,23 @@
 server:
-  port: 8080
-spring:
-  mongodb:
+  port: 8100
+  http2:
+    enabled: true
 
+spring:
+  profiles:
+    active: dev
+  application:
+    name: profile
+  data:
+    mongodb:
+      database: ${spring.application.name}
+      uuid-representation: standard
+      host: localhost
+
+management:
+  server:
+    port: ${server.port}
+  endpoints:
+    web:
+      exposure:
+        include: "*"
