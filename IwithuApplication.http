@@ -46,7 +46,7 @@ Authorization: 0nQaqEo2I05FAl8hYVmTr0R1Cg6kZBGiZxp7e91pLrSLC7dA
 GET http://51.250.14.207:8080/events
 Accept: application/json
 Content-Type: application/json
-Authorization: 0nQaqEo2I05FAl8hYVmTr0R1Cg6kZBGiZxp7e91pLrSLC7dA
+Authorization: a4CrUdCiSNDtFAnUYiLx8pfl1o7sOW2D7XDcScoEeIkxzxNQ
 
 ###
 
