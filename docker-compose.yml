@@ -1,23 +1,17 @@
 version: '3'
 services:
-  mongodb:
+  iwu-mongodb:
     image: 'mongo:5.0.3'
-    container_name: "mj-mongodb"
-    ports:
-      - '27017:27017'
+    container_name: "iwu-mongodb"
     networks:
       - backend
-  app:
-    container_name: "mj-profile"
+  iwu-app:
+    image: 'zgys/iwithu:0.1'
+    container_name: "iwu-app"
     depends_on:
-      - 'mongodb'
-    build:
-      context: .
-      dockerfile: profile/Dockerfile
+      - 'iwu-mongodb'
     ports:
-      - '8080:80'
-    expose:
-      - '8080:80'
+      - '8080:8080'
     networks:
       - backend
 

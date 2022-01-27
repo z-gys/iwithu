@@ -1,0 +1,24 @@
+POST http://51.250.14.207:8080/register
+Accept: application/json
+Content-Type: application/json
+
+{
+  "login": "Vasya",
+  "password": "passvord",
+  "name": "vasya",
+  "about": "Ya vasya"
+}
+
+###
+
+POST http://51.250.14.207:8080/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "login": "Vasya",
+  "password": "passvord"
+}
+
+###
+

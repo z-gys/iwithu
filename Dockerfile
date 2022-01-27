@@ -5,10 +5,8 @@ WORKDIR /opt/app
 ENV SPRING_PROFILES_ACTIVE=docker
 ENV JAVA_OPTS=-Xmx256m
 
-EXPOSE 8080
-
-COPY profile/entrypoint.sh /
-COPY profile/target/*.jar .
+COPY entrypoint.sh /
+COPY target/*.jar .
 
 RUN apk add --update --no-cache curl \
     && chmod +x /entrypoint.sh
