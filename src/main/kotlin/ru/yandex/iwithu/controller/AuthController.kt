@@ -10,28 +10,34 @@ import org.springframework.web.bind.annotation.RestController
 import ru.yandex.iwithu.dto.auth.LoginRequestDto
 import ru.yandex.iwithu.dto.auth.LoginResponseDto
 import ru.yandex.iwithu.dto.auth.RegistrationRequestDto
+import ru.yandex.iwithu.service.AuthService
 import javax.validation.Valid
 
 @RestController
 @Validated
-@RequestMapping("\${api.base-path:}")
-class AuthController {
+@RequestMapping(
+    produces = ["application/json"],
+    consumes = ["application/json"]
+)
+class AuthController(
+    private val authService: AuthService
+) {
     @PostMapping(
-        value = ["/register"],
-        consumes = ["application/json"]
+        value = ["/register"]
     )
-    fun register( @Valid @RequestBody registrationRequestDto: RegistrationRequestDto
-): ResponseEntity<Unit> {
-        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
+    fun register(
+        @Valid @RequestBody registrationRequestDto: RegistrationRequestDto
+    ): ResponseEntity<Unit> {
+        authService.register(registrationRequestDto)
+        return ResponseEntity.ok().build()
     }
 
     @PostMapping(
-        value = ["/login"],
-        produces = ["application/json"],
-        consumes = ["application/json"]
+        value = ["/login"]
     )
-    fun login( @Valid @RequestBody loginRequestDto: LoginRequestDto
+    fun login(
+        @Valid @RequestBody loginRequestDto: LoginRequestDto
     ): ResponseEntity<LoginResponseDto> {
-        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
+        return ResponseEntity.ok(authService.login(loginRequestDto))
     }
 }

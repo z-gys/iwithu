@@ -19,7 +19,7 @@ data class RegistrationRequestDto(
     @field:JsonProperty("login") val login: String,
 
     @get:NotNull  
-    @field:JsonProperty("password") val password: String,
+    @field:JsonProperty("password") var password: String,
 
     @field:JsonProperty("about") val about: String? = null
 ) {
