@@ -2,7 +2,6 @@ package ru.yandex.iwithu.controller
 
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
-import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
@@ -55,7 +54,7 @@ class EventsController(
         pageable: Pageable,
         @AuthenticatedUser user: User
     ): ResponseEntity<Page<ShortEventDto>> {
-        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
+        return ResponseEntity.ok(eventsService.getJoinedEvents(pageable, user))
     }
 
     @GetMapping("my")
@@ -63,47 +62,51 @@ class EventsController(
         pageable: Pageable,
         @AuthenticatedUser user: User
     ): ResponseEntity<Page<ShortEventDto>> {
-        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
+        return ResponseEntity.ok(eventsService.getOwnedEvents(pageable, user))
     }
 
     @GetMapping("{eventId}")
     fun eventsEventIdGet(
-        @PathVariable("eventId") eventId: Int,
+        @PathVariable("eventId") eventId: Long,
         @AuthenticatedUser user: User
     ): ResponseEntity<EventDto> {
-        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
+        return ResponseEntity.ok(eventsService.getEvent(eventId))
     }
 
     @DeleteMapping( "{eventId}")
     fun eventsEventIdDelete(
-        @PathVariable("eventId") eventId: Int,
+        @PathVariable("eventId") eventId: Long,
         @AuthenticatedUser user: User
     ): ResponseEntity<Unit> {
-        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
+        eventsService.deleteEvent(eventId, user)
+        return ResponseEntity.ok().build()
     }
 
     @PostMapping("{eventId}/join")
     fun eventsEventIdJoinPost(
-        @PathVariable("eventId") eventId: Int,
+        @PathVariable("eventId") eventId: Long,
         @AuthenticatedUser user: User
     ): ResponseEntity<Unit> {
-        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
+        eventsService.joinToEvent(eventId, user)
+        return ResponseEntity.ok().build()
     }
 
     @DeleteMapping("{eventId}/join")
     fun eventsEventIdJoinDelete(
-        @PathVariable("eventId") eventId: Int,
+        @PathVariable("eventId") eventId: Long,
         @AuthenticatedUser user: User
     ): ResponseEntity<Unit> {
-        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
+        eventsService.leaveEvent(eventId, user)
+        return ResponseEntity.ok().build()
     }
 
     @PutMapping("{eventId}")
     fun eventsEventIdPut(
-        @PathVariable("eventId") eventId: Int,
-        @Valid @RequestBody eventDto: EventDto,
+        @PathVariable("eventId") eventId: Long,
+        @Valid @RequestBody eventDto: EventCreateDto,
         @AuthenticatedUser user: User
     ): ResponseEntity<Unit> {
-        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
+        eventsService.editEvent(eventId, eventDto, user)
+        return ResponseEntity.ok().build()
     }
 }

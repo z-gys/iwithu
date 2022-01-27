@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import ru.yandex.iwithu.exception.AlreadyExistsException
 import ru.yandex.iwithu.exception.BadCredentialException
 import ru.yandex.iwithu.exception.BadTokenException
+import ru.yandex.iwithu.exception.ForbiddenException
+import ru.yandex.iwithu.exception.NotFoundException
 
 /**
 @author ugoryntsev
@@ -35,6 +37,18 @@ class ExceptionHandler {
     fun onBadToken(): ResponseEntity<Unit> = ResponseEntity
         .status(HttpStatus.UNAUTHORIZED)
         .headers(errorHeaders("Bad token"))
+        .build()
+
+    @ExceptionHandler(NotFoundException::class)
+    fun onNotFound(): ResponseEntity<Unit> = ResponseEntity
+    .status(HttpStatus.NOT_FOUND)
+    .headers(errorHeaders("Not found"))
+    .build()
+
+    @ExceptionHandler(ForbiddenException::class)
+    fun onForbidden(): ResponseEntity<Unit> = ResponseEntity
+        .status(HttpStatus.FORBIDDEN)
+        .headers(errorHeaders("Forbidden"))
         .build()
 
     private fun errorHeaders(value: String): HttpHeaders {

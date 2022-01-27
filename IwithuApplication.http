@@ -22,3 +22,29 @@ Content-Type: application/json
 
 ###
 
+
+POST http://51.250.14.207:8080/events
+Accept: application/json
+Content-Type: application/json
+Authorization: KIc9A77wbCxvYdHrGUe2VW6kIF1zP9RjnzKVn5IZ9AM2lMnZ
+
+{
+  "title": "Poker",
+  "category": "Настольные игры",
+  "description": "Покер - карточная играб цель которой собрать выигрышную комбинацию",
+  "time": "2022-01-28T18:30:00Z",
+  "capacity": 10,
+  "place": {
+    "lat": 55.736345,
+    "lon": 37.640823,
+    "address": "Москва, Садовническая наб. 75, F1"
+  }
+}
+
+###
+
+GET http://51.250.14.207:8080/events
+Accept: application/json
+Content-Type: application/json
+Authorization: KIc9A77wbCxvYdHrGUe2VW6kIF1zP9RjnzKVn5IZ9AM2lMnZ
+

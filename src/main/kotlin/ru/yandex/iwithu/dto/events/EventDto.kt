@@ -2,7 +2,11 @@ package ru.yandex.iwithu.dto.events
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
-import java.time.Instant
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
+import java.time.LocalDateTime
 import javax.validation.Valid
 import javax.validation.constraints.NotNull
 
@@ -30,7 +34,9 @@ data class EventDto(
 
     @get:NotNull
     @field:JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
-    @field:JsonProperty("time") val time: Instant,
+    @field:JsonSerialize(using = LocalDateTimeSerializer::class)
+    @field:JsonDeserialize(using = LocalDateTimeDeserializer::class)
+    @field:JsonProperty("time") val time: LocalDateTime,
 
     @field:JsonProperty("owner") val owner: String,
 

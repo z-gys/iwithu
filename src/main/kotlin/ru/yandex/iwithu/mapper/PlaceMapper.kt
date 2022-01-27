@@ -7,6 +7,10 @@ import ru.yandex.iwithu.model.Place
 @author ugoryntsev
  */
 
-fun PlaceDto.toPlace(): Place = Place(
+fun PlaceDto.toEntity(): Place = Place(
+    lat, lon, address
+)
+
+fun Place.toDto(): PlaceDto = PlaceDto(
     lat, lon, address
 )

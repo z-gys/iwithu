@@ -16,7 +16,7 @@ class Event (
     val owner: String,
     val chatLink: String?,
     val capacity: Int?,
-    val members: MutableList<String> = mutableListOf(),
+    val members: MutableSet<String> = mutableSetOf(),
     val place: Place?
 ) {
     companion object {
