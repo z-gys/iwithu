@@ -26,7 +26,7 @@ Content-Type: application/json
 POST http://51.250.14.207:8080/events
 Accept: application/json
 Content-Type: application/json
-Authorization: KIc9A77wbCxvYdHrGUe2VW6kIF1zP9RjnzKVn5IZ9AM2lMnZ
+Authorization: 0nQaqEo2I05FAl8hYVmTr0R1Cg6kZBGiZxp7e91pLrSLC7dA
 
 {
   "title": "Poker",
@@ -46,5 +46,47 @@ Authorization: KIc9A77wbCxvYdHrGUe2VW6kIF1zP9RjnzKVn5IZ9AM2lMnZ
 GET http://51.250.14.207:8080/events
 Accept: application/json
 Content-Type: application/json
-Authorization: KIc9A77wbCxvYdHrGUe2VW6kIF1zP9RjnzKVn5IZ9AM2lMnZ
+Authorization: 0nQaqEo2I05FAl8hYVmTr0R1Cg6kZBGiZxp7e91pLrSLC7dA
+
+###
+
+PUT http://51.250.14.207:8080/events/1
+Accept: application/json
+Content-Type: application/json
+Authorization: 0nQaqEo2I05FAl8hYVmTr0R1Cg6kZBGiZxp7e91pLrSLC7dA
+
+{
+  "title": "Poker",
+  "category": "Настольные игры",
+  "description": "Покер - карточная игра, цель которой собрать выигрышную комбинацию",
+  "time": "2022-01-28T18:30:00Z",
+  "capacity": 6,
+  "place": {
+    "lat": 55.736345,
+    "lon": 37.640823,
+    "address": "Москва, Садовническая наб. 75, F1"
+  }
+}
+
+###
+
+GET http://51.250.14.207:8080/events/my
+Accept: application/json
+Content-Type: application/json
+Authorization: 0nQaqEo2I05FAl8hYVmTr0R1Cg6kZBGiZxp7e91pLrSLC7dA
+
+
+###
+
+GET http://51.250.14.207:8080/events/1
+Accept: application/json
+Content-Type: application/json
+Authorization: 0nQaqEo2I05FAl8hYVmTr0R1Cg6kZBGiZxp7e91pLrSLC7dA
+
+###
+
+DELETE http://51.250.14.207:8080/events/1
+Accept: application/json
+Content-Type: application/json
+Authorization: 0nQaqEo2I05FAl8hYVmTr0R1Cg6kZBGiZxp7e91pLrSLC7dA
 
