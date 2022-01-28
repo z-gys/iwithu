@@ -40,6 +40,10 @@ data class EventDto(
 
     @field:JsonProperty("owner") val owner: String,
 
+    @field:JsonProperty("members") val members: Set<String>,
+
+    @field:JsonProperty("canJoin") val canJoin: Boolean,
+
     @field:JsonProperty("chatLink") val chatLink: String? = null,
 
     @field:JsonProperty("capacity") val capacity: Int? = null,

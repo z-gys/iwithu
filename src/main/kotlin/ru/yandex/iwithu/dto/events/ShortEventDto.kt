@@ -41,7 +41,9 @@ data class ShortEventDto(
 
     @field:JsonProperty("id") val id: Long,
 
-    @field:JsonProperty("capacity") val capacity: Int? = null
+    @field:JsonProperty("capacity") val capacity: Int? = null,
+
+    @field:JsonProperty("chatLink") val chatLink: String? = null
 ) {
 
 }

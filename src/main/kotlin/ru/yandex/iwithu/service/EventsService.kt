@@ -26,6 +26,8 @@ class EventsService(
         val owner = user.login
 
         val event = eventCreateDto.toEvent(id, owner)
+        event.members.add(user.login)
+
         eventsDao.save(event)
     }
 
@@ -39,8 +41,11 @@ class EventsService(
         return page.map { it.toShortDto() }
     }
 
-    fun getEvent(eventId: Long): EventDto =
-        eventsDao.findById(eventId).map { it.toFullDto() }.orElse(null) ?: throw NotFoundException()
+    fun getEvent(eventId: Long, user: User): EventDto {
+        val event = eventsDao.findById(eventId).orElse(null) ?: throw NotFoundException()
+        val canJoin = (event.capacity ?: Int.MAX_VALUE) > event.members.size && !event.members.contains(user.login)
+        return event.toFullDto(canJoin)
+    }
 
     fun deleteEvent(eventId: Long, user: User) {
         val eventO = eventsDao.findById(eventId)

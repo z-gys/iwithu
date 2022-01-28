@@ -29,15 +29,18 @@ fun Event.toShortDto(): ShortEventDto = ShortEventDto(
     members.size,
     time,
     id,
-    capacity
+    capacity,
+    chatLink
 )
 
-fun Event.toFullDto(): EventDto = EventDto(
+fun Event.toFullDto(canJoin: Boolean): EventDto = EventDto(
     title,
     category,
     description,
     time,
     owner,
+    members,
+    canJoin,
     chatLink,
     capacity,
     place?.toDto()

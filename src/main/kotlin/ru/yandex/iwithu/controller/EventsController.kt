@@ -69,7 +69,7 @@ class EventsController(
         @PathVariable("eventId") eventId: Long,
         @AuthenticatedUser user: User
     ): ResponseEntity<EventDto> {
-        return ResponseEntity.ok(eventsService.getEvent(eventId))
+        return ResponseEntity.ok(eventsService.getEvent(eventId, user))
     }
 
     @DeleteMapping( "{eventId}")

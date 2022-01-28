@@ -387,6 +387,9 @@ components:
         time:
           type: string
           description: Дата и время в формате "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        chatLink:
+          type: string
+          description: Ссылка на чат
       required:
         - category
         - title
@@ -430,6 +433,14 @@ components:
         owner:
           type: string
           description: Логин создателя события
+        members:
+          type: array
+          description: Присоединившиеся учасники
+          items:
+            type: string
+        canJoin:
+          type: boolean
+          description: Может ли пользователь присоединться
         title:
           description: Название события
           type: string
@@ -455,3 +466,5 @@ components:
         - category
         - description
         - time
+        - canJoin
+        - members
