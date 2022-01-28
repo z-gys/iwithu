@@ -3,10 +3,10 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "login": "Vasya",
-  "password": "passvord",
-  "name": "vasya",
-  "about": "Ya vasya"
+  "login": "test",
+  "password": "test",
+  "name": "Тестов Тест Тестович",
+  "about": "Ya тест"
 }
 
 ###
@@ -18,6 +18,17 @@ Content-Type: application/json
 {
   "login": "Vasya",
   "password": "passvord"
+}
+
+###
+
+POST http://51.250.14.207:8080/login
+Accept: application/json
+Content-Type: application/json
+
+{
+"login": "test",
+"password": "test"
 }
 
 ###
@@ -46,14 +57,14 @@ Authorization: 0nQaqEo2I05FAl8hYVmTr0R1Cg6kZBGiZxp7e91pLrSLC7dA
 GET http://51.250.14.207:8080/events
 Accept: application/json
 Content-Type: application/json
-Authorization: a4CrUdCiSNDtFAnUYiLx8pfl1o7sOW2D7XDcScoEeIkxzxNQ
+Authorization: pNzPIMSeZoFtcoKiSIWGfurXPHgR17a4gSS24j2AI7FMQ7zG
 
 ###
 
-PUT http://51.250.14.207:8080/events/1
+PUT http://51.250.14.207:8080/events/17
 Accept: application/json
 Content-Type: application/json
-Authorization: 0nQaqEo2I05FAl8hYVmTr0R1Cg6kZBGiZxp7e91pLrSLC7dA
+Authorization: pNzPIMSeZoFtcoKiSIWGfurXPHgR17a4gSS24j2AI7FMQ7zG
 
 {
   "title": "Poker",
@@ -78,10 +89,17 @@ Authorization: 0nQaqEo2I05FAl8hYVmTr0R1Cg6kZBGiZxp7e91pLrSLC7dA
 
 ###
 
-GET http://51.250.14.207:8080/events/1
+GET http://51.250.14.207:8080/events/17
 Accept: application/json
 Content-Type: application/json
-Authorization: 0nQaqEo2I05FAl8hYVmTr0R1Cg6kZBGiZxp7e91pLrSLC7dA
+Authorization: pNzPIMSeZoFtcoKiSIWGfurXPHgR17a4gSS24j2AI7FMQ7zG
+
+###
+
+POST http://51.250.14.207:8080/events/17/join
+Accept: application/json
+Content-Type: application/json
+Authorization: t1VXtZV2yyNpvMRZ46CmkOCPmiwFGMfDtLXL5ZBBqZxHGOvv
 
 ###
 

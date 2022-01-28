@@ -8,6 +8,7 @@ import ru.yandex.iwithu.dao.SequenceDao
 import ru.yandex.iwithu.dto.events.EventCreateDto
 import ru.yandex.iwithu.dto.events.EventDto
 import ru.yandex.iwithu.dto.events.ShortEventDto
+import ru.yandex.iwithu.exception.CantJoinException
 import ru.yandex.iwithu.exception.ForbiddenException
 import ru.yandex.iwithu.exception.NotFoundException
 import ru.yandex.iwithu.mapper.toEvent
@@ -62,6 +63,12 @@ class EventsService(
 
     fun joinToEvent(eventId: Long, user: User) {
         val event = findEvent(eventId)
+        if (event.members.contains(user.login)) {
+            return
+        }
+        if ((event.capacity?: Int.MAX_VALUE) <= event.members.size) {
+            throw CantJoinException()
+        }
         event.members.add(user.login)
         eventsDao.save(event)
     }

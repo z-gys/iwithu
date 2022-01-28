@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import ru.yandex.iwithu.exception.AlreadyExistsException
 import ru.yandex.iwithu.exception.BadCredentialException
 import ru.yandex.iwithu.exception.BadTokenException
+import ru.yandex.iwithu.exception.CantJoinException
 import ru.yandex.iwithu.exception.ForbiddenException
 import ru.yandex.iwithu.exception.NotFoundException
 
@@ -49,6 +50,12 @@ class ExceptionHandler {
     fun onForbidden(): ResponseEntity<Unit> = ResponseEntity
         .status(HttpStatus.FORBIDDEN)
         .headers(errorHeaders("Forbidden"))
+        .build()
+
+    @ExceptionHandler(CantJoinException::class)
+    fun onCantJoin(): ResponseEntity<Unit> = ResponseEntity
+        .badRequest()
+        .headers(errorHeaders("Can't join"))
         .build()
 
     private fun errorHeaders(value: String): HttpHeaders {
